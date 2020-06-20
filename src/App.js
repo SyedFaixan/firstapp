@@ -4,7 +4,7 @@ import './App.css';
 function App() {
   return (
     <div>
-    <p>The value of counter is </p>
+    <p>The value of counter is trhh </p>
       <p>Update Counter</p>
     </div>
 
