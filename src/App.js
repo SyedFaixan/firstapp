@@ -1,14 +1,22 @@
-import React from 'react';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
 function App() {
-  let counter = 5;
+  let [weight, setWeight] = useState(4);
+
   return (
     <div>
-    <p>The value of counter is {counter}</p>
-  <button onClick= {()=>{counter++}} name="button">UPDATE COUNTER</button>
-    </div>
+      <p>Weight is: {weight}</p>
 
+      <button
+        onClick={() => {
+          setWeight(weight == 10 ? (weight = 0) : weight + 1);
+        }}
+        name="button"
+      >
+        Update Weight
+      </button>
+    </div>
   );
 }
 
