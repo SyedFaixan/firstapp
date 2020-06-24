@@ -1,13 +1,18 @@
-import React from 'react';
-function MyFile() {
+import React from "react";
+
+function Myfile(props) {
+  let userName = props.appName;
+
   return (
-    <div class="topnav">
-  <a class="active" href="#home">Home</a>
-  <a href="#news">News</a>
-  <a href="#contact">Contact</a>
-  <a href="#about">About</a>
-</div>
+    <div className="topnav">
+      <a className="active" href="#home">
+        {userName}
+      </a>
+      <a href="#news">News</a>
+      <a href="#contact">Contact</a>
+      <a href="#about">{props.appUpdate}</a>
+    </div>
   );
 }
 
-export default MyFile;
+export default Myfile;
