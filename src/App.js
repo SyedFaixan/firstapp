@@ -1,40 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
-import FacebookLogin from "react-facebook-login";
-import GoogleLogin from "react-google-login";
 
-const responseFacebook = (response) => {
-  console.log("login result", response);
-};
-const componentClicked = (data) => {
-  console.warn(data);
-};
+function App() {
+  const userName = "SyedFaixan";
+  const [data, setData] = useState([{}]); //state of the componenet
+  // api calls should be implemented inside useEffect
+  useEffect(() => {
+    //definition of function
+    async function apiCall() {
+      const responseFromApiCall = await fetch(
+        "https://api.github.com/users/SyedFaixan"
+      );
 
-const responseGoogle = (response) => {
-  console.log(response);
-};
-function App(props) {
-  console.log(props);
+      //same as above line but with string concatenation
+      /*const responseFromApiCall = await fetch(
+       *  "https://api.github.com/users/"+userName
+       */
+      const ResponseInJsonFormat = await responseFromApiCall.json();
+      console.log(ResponseInJsonFormat);
+      //set State: when getting response from API change the state
+      setData(ResponseInJsonFormat);
+    }
+    //call to function
+    apiCall();
+  }, []);
+
+  //by studying the output response to that api call,
+  //you can print/render whatever field of that response object
   return (
     <div>
-      <h1>Login with Facebook</h1>
-      <FacebookLogin
-        appId="256203798781145"
-        autoLoad={true}
-        fields="name,email,picture"
-        onClick={componentClicked}
-        callback={responseFacebook}
-      />
-      <h1>Login with Google</h1>
-      <GoogleLogin
-        clientId="360526443191-eoaosjlhl752kgpshb8oqcdhjp1l89od.apps.googleusercontent.com"
-        buttonText="Login"
-        onSuccess={responseGoogle}
-        onFailure={responseGoogle}
-        cookiePolicy={"single_host_origin"}
-      />
+      <h1>Hello {data.name ? data.name : data.login}</h1>
+      <h3>You Created github on {data.created_at}</h3>
     </div>
   );
 }
 
+// data.name ? data.name : data.login
+// if data.name is available (is true or not null) then show data.name else show data.login
 export default App;
